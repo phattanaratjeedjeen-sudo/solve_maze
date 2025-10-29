@@ -1,1 +1,1 @@
-install ROS2_pkg_cpp_py https://github.com/tchoopojcharoen/ROS2_pkg_cpp_py
+install [ROS2_pkg_cpp_py](https://github.com/tchoopojcharoen/ROS2_pkg_cpp_py)
