@@ -1,4 +1,0 @@
-source;share/scantest/local_setup.bash
-source;share/scantest/local_setup.dsv
-source;share/scantest/local_setup.sh
-source;share/scantest/local_setup.zsh

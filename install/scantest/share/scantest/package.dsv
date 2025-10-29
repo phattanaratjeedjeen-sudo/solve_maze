@@ -1,8 +1,0 @@
-source;share/scantest/hook/cmake_prefix_path.ps1
-source;share/scantest/hook/cmake_prefix_path.dsv
-source;share/scantest/hook/cmake_prefix_path.sh
-source;share/scantest/local_setup.bash
-source;share/scantest/local_setup.dsv
-source;share/scantest/local_setup.ps1
-source;share/scantest/local_setup.sh
-source;share/scantest/local_setup.zsh
