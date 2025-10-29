@@ -1,0 +1,28 @@
+slam_toolbox:
+  ros__parameters:
+
+    # General
+    use_sim_time: false
+    mode: "mapping"
+
+    # Laser settings
+    min_laser_range: 0.05        
+    max_laser_range: 1.0        
+    resolution: 0.01               
+    map_update_interval: 1.0        
+    scan_queue_size: 10
+
+    # Frames
+    map_frame: "map"
+    odom_frame: "odom_matcher"    
+    base_frame: "base_link"
+
+    # Motion thresholds (to trigger updates)
+    minimum_travel_distance: 0.1   
+    minimum_travel_heading: 0.05   
+
+    use_scan_matching: true
+    use_scan_barycenter: true
+    transform_publish_period: 0.1
+    transform_timeout: 0.2
+

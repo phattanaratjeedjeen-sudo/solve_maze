@@ -1,0 +1,5 @@
+[0.000000] (-) TimerEvent: {}
+[0.000153] (-) JobUnselected: {'identifier': 'csm'}
+[0.000169] (-) JobUnselected: {'identifier': 'ros2_laser_scan_matcher'}
+[0.000179] (-) JobUnselected: {'identifier': 'scantest'}
+[0.000188] (-) EventReactorShutdown: {}

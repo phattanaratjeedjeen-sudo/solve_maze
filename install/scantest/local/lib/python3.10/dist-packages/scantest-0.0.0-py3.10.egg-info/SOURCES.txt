@@ -1,0 +1,7 @@
+setup.py
+scantest/__init__.py
+scantest/dummy_module.py
+scantest.egg-info/PKG-INFO
+scantest.egg-info/SOURCES.txt
+scantest.egg-info/dependency_links.txt
+scantest.egg-info/top_level.txt
