@@ -74,5 +74,5 @@ def generate_launch_description():
         laser_scan_matcher,
         online_async_launch,
         # laser_slam,
-        rviz,
+        # rviz,
     ])
