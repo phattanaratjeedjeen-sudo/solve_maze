@@ -29,6 +29,8 @@ ament_python_install_package(${PROJECT_NAME})
 install(PROGRAMS
   scripts/dummy_script.py
   scripts/location.py
+  scripts/state_manager.py
+  scripts/random_grid.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
