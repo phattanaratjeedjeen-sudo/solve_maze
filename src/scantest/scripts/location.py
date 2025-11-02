@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import numpy as np
 if not hasattr(np, 'float'):
     np.float = float
@@ -18,7 +20,7 @@ CELL_SIZE = MAP_SIZE_M / GRID_SIZE  # 0.3m per cell
 
 class PoseConverter(Node):
     def __init__(self):
-        super().__init__('pose_converter')
+        super().__init__('pose_converter_node')
         
         self.latest_pose_msg = None
         

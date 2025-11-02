@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Pose2D
@@ -12,7 +14,7 @@ MAX_GRID_COORD = 5
 
 class GridPublisherMock(Node):
     def __init__(self):
-        super().__init__('grid_publisher_mock')
+        super().__init__('random_grid_node')
         
         # Publisher for /grid_location (Pose2D)
         self.publisher_grid = self.create_publisher(Pose2D, '/grid_location', 10)
