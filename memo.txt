@@ -1,1 +1,3 @@
+sudo apt install ros-jazzy-tf-transformations
+cd ~/solve_maze/src && git clone 
 sudo chmod 777 /dev/ttyUSB0
