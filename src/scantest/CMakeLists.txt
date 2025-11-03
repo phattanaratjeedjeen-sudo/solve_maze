@@ -31,6 +31,7 @@ install(PROGRAMS
   scripts/location.py
   scripts/state_manager.py
   scripts/random_grid.py
+  scripts/random_pose.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
