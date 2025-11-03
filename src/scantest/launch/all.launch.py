@@ -42,11 +42,6 @@ def generate_launch_description():
         'online_async_launch.py'
     )
 
-    laser_slam_path = os.path.join(
-        my_package_dir,
-        'launch',
-        'laser_slam.launch.py'
-    )
 
     rps = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(rps_path)
@@ -64,15 +59,10 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(online_async_launch_path)
     )
 
-    laser_slam = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(laser_slam_path)
-    )
-
     return LaunchDescription([
         rps,
         laser_active,
         laser_scan_matcher,
         online_async_launch,
-        # laser_slam,
-        # rviz,
+        rviz,
     ])

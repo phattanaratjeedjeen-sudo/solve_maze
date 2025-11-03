@@ -117,7 +117,6 @@ class StateManager(Node):
 
 
     def state_publisher_callback(self):
-        # Publish current state
         state_msg = String()
         state_msg.data = self.current_state
         self.publisher_state.publish(state_msg)

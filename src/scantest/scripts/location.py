@@ -8,6 +8,7 @@ import math
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import PoseWithCovarianceStamped, Pose2D
+from std_msgs.msg import Int32, Float64 # Import Float64 message type
 from tf_transformations import euler_from_quaternion
 
 # Define the desired publishing rate (1.0 Hz = publish every 1.0 second)
@@ -35,11 +36,16 @@ class PoseConverter(Node):
         self.publisher_location = self.create_publisher(Pose2D, '/location', 10)
         self.publisher_grid = self.create_publisher(Pose2D, '/grid_location', 10)
         
+        # New Publishers for std_msgs.msg/Float64
+        self.publisher_grid_x_float = self.create_publisher(Float64, '/ros2mqtt/grid_x_float', 10)
+        self.publisher_grid_y_float = self.create_publisher(Float64, '/ros2mqtt/grid_y_float', 10)
+        self.publisher_grid_theta_float = self.create_publisher(Float64, '/ros2mqtt/grid_theta_float', 10)
+
         timer_period = 1.0 / PUBLISH_FREQUENCY_HZ
         self.timer = self.create_timer(timer_period, self.timer_callback)
         
         self.get_logger().info(
-            f'Pose Converter Node running. Publishing to /location and /grid_location at {PUBLISH_FREQUENCY_HZ:.1f} Hz.'
+            f'Pose Converter Node running. Publishing to /location, /grid_location, /grid_x_float, /grid_y_float, and /grid_theta_float at {PUBLISH_FREQUENCY_HZ:.1f} Hz.'
         )
 
     def pose_callback(self, msg):
@@ -61,11 +67,14 @@ class PoseConverter(Node):
             
         (roll, pitch, yaw) = euler_from_quaternion(quaternion)
         
+        # Convert yaw to degrees
+        yaw_degrees = math.degrees(yaw)
+        
         # --- Continuous pose (meters, degrees) ---
         location_msg = Pose2D()
         location_msg.x = pose_data.x
         location_msg.y = pose_data.y
-        location_msg.theta = math.degrees(yaw)
+        location_msg.theta = yaw_degrees
         self.publisher_location.publish(location_msg)
         
         # --- Discrete grid mapping (use absolute x, y) ---
@@ -83,10 +92,23 @@ class PoseConverter(Node):
         grid_msg = Pose2D()
         grid_msg.x = float(grid_x)
         grid_msg.y = float(grid_y)
-        grid_msg.theta = math.degrees(yaw)
+        grid_msg.theta = yaw_degrees
         
         self.publisher_grid.publish(grid_msg)
 
+
+        grid_x_float_msg = Float64()
+        grid_x_float_msg.data = float(grid_x)
+        self.publisher_grid_x_float.publish(grid_x_float_msg)
+
+        grid_y_float_msg = Float64()
+        grid_y_float_msg.data = float(grid_y)
+        self.publisher_grid_y_float.publish(grid_y_float_msg)
+
+        grid_theta_float_msg = Float64()
+        grid_theta_float_msg.data = yaw_degrees
+        self.publisher_grid_theta_float.publish(grid_theta_float_msg)
+        
         # Debug info
         self.get_logger().debug(
             f"/location: ({location_msg.x:.2f}, {location_msg.y:.2f}, {location_msg.theta:.1f}°) "
