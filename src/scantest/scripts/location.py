@@ -8,8 +8,9 @@ import math
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import PoseWithCovarianceStamped, Pose2D
-from std_msgs.msg import Int32, Float64 # Import Float64 message type
+from std_msgs.msg import Float64 # Import Float64 message type
 from tf_transformations import euler_from_quaternion
+from rcl_interfaces.msg import SetParametersResult
 
 # Define the desired publishing rate (1.0 Hz = publish every 1.0 second)
 PUBLISH_FREQUENCY_HZ = 1.0
@@ -24,6 +25,12 @@ class PoseConverter(Node):
         super().__init__('pose_converter_node')
         
         self.latest_pose_msg = None
+        # parameters
+        self.declare_parameter('initial_grid_x', 0.0)
+        self.declare_parameter('initial_grid_y', 0.0)
+        self.initial_grid_x = self.get_parameter('initial_grid_x').get_parameter_value().double_value
+        self.initial_grid_y = self.get_parameter('initial_grid_y').get_parameter_value().double_value
+        self.add_on_set_parameters_callback(self.parameter_callback)
         
         # Subscribe to /pose (PoseWithCovarianceStamped)
         self.subscription = self.create_subscription(
@@ -48,10 +55,22 @@ class PoseConverter(Node):
             f'Pose Converter Node running. Publishing to /location, /grid_location, /grid_x_float, /grid_y_float, and /grid_theta_float at {PUBLISH_FREQUENCY_HZ:.1f} Hz.'
         )
 
+
+    def parameter_callback(self, params):
+        for param in params:
+            if param.name == 'initial_grid_x':
+                self.initial_grid_x = param.value
+                self.get_logger().info(f'Initial grid X set to: {self.initial_grid_x}')
+            elif param.name == 'initial_grid_y':
+                self.initial_grid_y = param.value
+                self.get_logger().info(f'Initial grid Y set to: {self.initial_grid_y}')
+        return SetParametersResult(successful=True)
+
     def pose_callback(self, msg):
         self.latest_pose_msg = msg
 
     def timer_callback(self):
+
         if self.latest_pose_msg is None:
             self.get_logger().warn('Waiting for first message on /pose...')
             return
@@ -76,17 +95,20 @@ class PoseConverter(Node):
         location_msg.y = pose_data.y
         location_msg.theta = yaw_degrees
         self.publisher_location.publish(location_msg)
+
+        grid_x = int(self.initial_grid_x + pose_data.x / CELL_SIZE)
+        grid_y = int(self.initial_grid_y + pose_data.y / CELL_SIZE)
         
-        # --- Discrete grid mapping (use absolute x, y) ---
-        abs_x = abs(pose_data.x)
-        abs_y = abs(pose_data.y)
+        # # --- Discrete grid mapping (use absolute x, y) ---
+        # abs_x = abs(pose_data.x)
+        # abs_y = abs(pose_data.y)
         
-        grid_x = int(abs_x / CELL_SIZE)
-        grid_y = int(abs_y / CELL_SIZE)
+        # grid_x = int(abs_x / CELL_SIZE)
+        # grid_y = int(abs_y / CELL_SIZE)
         
-        # Clamp values to grid boundaries
-        grid_x = max(0, min(GRID_SIZE - 1, grid_x))
-        grid_y = max(0, min(GRID_SIZE - 1, grid_y))
+        # # Clamp values to grid boundaries
+        # grid_x = max(0, min(GRID_SIZE - 1, grid_x))
+        # grid_y = max(0, min(GRID_SIZE - 1, grid_y))
         
         # Cast to float for Pose2D
         grid_msg = Pose2D()
