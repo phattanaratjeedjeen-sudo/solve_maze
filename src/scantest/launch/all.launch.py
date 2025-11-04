@@ -54,15 +54,15 @@ def generate_launch_description():
         'state_manager.py'
     )
 
-    standalone_path = os.path.join(
-        my_package_dir,
-        'launch',
-        'standalone.launch.xml'
-    )
+    # standalone_path = os.path.join(
+    #     my_package_dir,
+    #     'launch',
+    #     'standalone.launch.xml'
+    # )
 
-    standalone = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(standalone_path)
-    )
+    # standalone = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource(standalone_path)
+    # )
 
     state_manager = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(state_manager_path)
@@ -89,7 +89,7 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        standalone,
+        # standalone,
         rps,
         location,
         state_manager,
