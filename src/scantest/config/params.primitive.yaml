@@ -6,22 +6,23 @@
     bridge:
       ros2mqtt:
         ros_topics:
-          - /current_state
-          - /ros2mqtt/grid_x_float
-          - /ros2mqtt/grid_y_float
-          - /ros2mqtt/grid_theta_float
-        /current_state:
+          # - /current_state
+          # - /ros2mqtt/grid_x_float
+          # - /ros2mqtt/grid_y_float
+          # - /ros2mqtt/grid_theta_float
+          - /mqttmsg
+        /mqttmsg:
           mqtt_topic: step
           primitive: true
-        /ros2mqtt/grid_x_float:
-          mqtt_topic: xx
-          primitive: true
-        /ros2mqtt/grid_y_float:
-          mqtt_topic: yy
-          primitive: true
-        /ros2mqtt/grid_theta_float:
-          mqtt_topic: theta
-          primitive: true
+        # /ros2mqtt/grid_x_float:
+        #   mqtt_topic: xx
+        #   primitive: true
+        # /ros2mqtt/grid_y_float:
+        #   mqtt_topic: yy
+        #   primitive: true
+        # /ros2mqtt/grid_theta_float:
+        #   mqtt_topic: theta
+        #   primitive: true
       # mqtt2ros:
       #   mqtt_topics:
       #     - pingpong/primitive

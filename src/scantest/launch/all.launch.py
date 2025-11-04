@@ -41,6 +41,7 @@ def generate_launch_description():
         'launch',
         'online_async_launch.py'
     )
+<<<<<<< HEAD
 
     loacation_path = os.path.join(
         my_package_dir,
@@ -67,6 +68,9 @@ def generate_launch_description():
     state_manager = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(state_manager_path)
     )
+=======
+ 
+>>>>>>> d95adb35cc5e55544e42ccb6764b08992d4068ff
 
     rps = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(rps_path)
@@ -84,15 +88,32 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(online_async_launch_path)
     )
 
-    location = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(loacation_path)
-    )
+
 
     return LaunchDescription([
+<<<<<<< HEAD
         # standalone,
+=======
+        Node(
+            package='scantest',
+            namespace='',
+            executable='state_manager.py',
+            name='state_manager',
+        ),
+        Node(
+            package='scantest',
+            namespace='',
+            executable='location.py',
+            name='location',  
+        ),
+        Node(
+            package='scantest',
+            namespace='',
+            executable='prepare_mqtt.py',
+            name='prepare_mqtt',  
+        ),
+>>>>>>> d95adb35cc5e55544e42ccb6764b08992d4068ff
         rps,
-        location,
-        state_manager,
         laser_active,
         laser_scan_matcher,
         online_async_launch,

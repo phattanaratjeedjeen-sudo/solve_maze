@@ -32,6 +32,7 @@ install(PROGRAMS
   scripts/state_manager.py
   scripts/random_grid.py
   scripts/random_pose.py
+  scripts/prepare_mqtt.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
