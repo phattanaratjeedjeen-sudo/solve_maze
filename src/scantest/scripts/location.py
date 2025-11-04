@@ -96,8 +96,8 @@ class PoseConverter(Node):
         location_msg.theta = yaw_degrees
         self.publisher_location.publish(location_msg)
 
-        grid_x = int(self.initial_grid_x + pose_data.x / CELL_SIZE)
-        grid_y = int(self.initial_grid_y + pose_data.y / CELL_SIZE)
+        grid_x = int(abs(1 + self.initial_grid_x + pose_data.x / CELL_SIZE))
+        grid_y = int(abs(1 + self.initial_grid_y + pose_data.y / CELL_SIZE))
         
         # # --- Discrete grid mapping (use absolute x, y) ---
         # abs_x = abs(pose_data.x)
