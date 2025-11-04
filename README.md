@@ -15,7 +15,5 @@ set initial grid
 - ros2 param set /pose_converter_node initial_grid_x <float>
 - ros2 param set /pose_converter_node initial_grid_y <float>
 
-set initial grid
-
 at PI5
 - ros2 launch scantest laser_active.py
