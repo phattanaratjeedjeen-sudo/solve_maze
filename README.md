@@ -1,5 +1,5 @@
 - cd
-- git clone
+- git clone https://github.com/phattanaratjeedjeen-sudo/solve_maze.git
 - cd ~/solve_maze
 - colcon build && source install setup.bash
 
