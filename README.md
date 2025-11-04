@@ -8,8 +8,12 @@ at PC station
 - ros2 launch scantest standalone.launch.xml
 
 set target grid
-- ros2 param set /
-- 
+- ros2 param set /state_manager_node target_x <int>
+- ros2 param set /state_manager_node target_x <int>
+
+set initial grid
+- ros2 param set /pose_converter_node initial_grid_x <float>
+- ros2 param set /pose_converter_node initial_grid_y <float>
 
 set initial grid
 
