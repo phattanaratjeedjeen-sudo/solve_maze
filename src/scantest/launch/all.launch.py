@@ -81,7 +81,7 @@ def generate_launch_description():
             name='prepare_mqtt',  
         ),
         rps,
-        # laser_active,
+        laser_active,
         laser_scan_matcher,
         online_async_launch,
         # rviz,
