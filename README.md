@@ -12,8 +12,8 @@ set target grid
 - ros2 param set /state_manager_node target_x <int>
 
 set initial grid
-- ros2 param set /pose_converter_node initial_grid_x <float>
-- ros2 param set /pose_converter_node initial_grid_y <float>
+- ros2 param set /location initial_grid_x <float>
+- ros2 param set /location initial_grid_y <float>
 
 at PI5
 - ros2 launch scantest laser_active.py
